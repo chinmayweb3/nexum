@@ -1,4 +1,5 @@
 "use client";
+
 import Link from "next/link";
 import React from "react";
 import { Button, buttonVariants } from "./ui/button";
@@ -10,7 +11,6 @@ import { useTheme } from "next-themes";
 
 const Navbar = () => {
   const { signOut } = useClerk();
-  const { setTheme, resolvedTheme: theme } = useTheme();
 
   return (
     <header className="absolute z-[10] flex h-[71px] w-full items-center bg-background shadow-sm">
@@ -39,13 +39,7 @@ const Navbar = () => {
           <Link href={"/sign-up"} className={cn(buttonVariants())}>
             GET STARTED <ArrowRight className="ml-[8px]" size={20} />
           </Link>
-          <Button
-            variant={"secondary"}
-            onClick={() => setTheme(theme == "dark" ? "light" : "dark")}
-            size={"icon"}
-          >
-            {theme == "dark" ? <Sun size={16} /> : <Moon size={16} />}
-          </Button>
+          <Theme />
         </div>
       </div>
     </header>
@@ -53,3 +47,21 @@ const Navbar = () => {
 };
 
 export default Navbar;
+
+const Theme = () => {
+  const { setTheme, theme } = useTheme();
+
+  return (
+    <Button
+      variant={"secondary"}
+      onClick={() => {
+        console.log("Cllciked ", theme);
+
+        setTheme(theme == "dark" ? "light" : "dark");
+      }}
+      size={"icon"}
+    >
+      {theme && theme == "light" ? "sun" : "moon"}
+    </Button>
+  );
+};
