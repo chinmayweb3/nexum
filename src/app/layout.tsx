@@ -5,6 +5,7 @@ import Navbar from "@/components/Navbar";
 import { cn } from "@/lib/utils";
 import { ClerkProvider } from "@clerk/nextjs";
 import { ThemeProvider } from "@/components/theme-provider";
+import TrpcProvider from "./_trpc/trpcProvider";
 
 const workSans = Work_Sans({ subsets: ["latin"] });
 
@@ -22,10 +23,12 @@ export default function RootLayout({
     <html lang="en">
       <body className={cn(workSans.className, "bg-muted text-primary")}>
         <ThemeProvider attribute="class" defaultTheme="system">
+          {/* <TrpcProvider> */}
           <ClerkProvider>
             <Navbar />
             {children}
           </ClerkProvider>
+          {/* </TrpcProvider> */}
         </ThemeProvider>
       </body>
     </html>

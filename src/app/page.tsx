@@ -1,6 +1,12 @@
+"use client";
 import PageWrapper from "@/components/PageWrapper";
+import { trpc } from "./_trpc/client";
 
 export default function Home() {
+  // const getTodos = trpc.getTodos.useQuery();
+
+  // console.log("pages ", getTodos.data);
+
   return (
     <PageWrapper>
       <section className="container flex h-[80vh] items-center justify-center self-center">
