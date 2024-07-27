@@ -7,22 +7,22 @@ import { ArrowRight } from "lucide-react";
 
 const Navbar = () => {
   return (
-    <header className="relative flex items-center bg-background h-[91px] shadow-sm ">
+    <header className="absolute w-full flex items-center bg-background h-[91px] shadow-sm ">
       <div className="container flex items-center justify-between">
         <Link href={"/"} className="inline-block text-[32px] font-bold ">
           Nexum.
         </Link>
         <div className="flex gap-[20px]">
           <Link
-            href={"/about"}
-            className={cn(buttonVariants(), "text-[16px] py-[22px]")}
+            href={"/sign-in"}
+            className={cn(buttonVariants(), "text-[16px] py-[20px]")}
           >
             LOGIN
           </Link>
           <Separator className="h-auto" orientation="vertical" />
           <Link
-            href={"/about"}
-            className={cn(buttonVariants(), "text-[16px] py-[22px]")}
+            href={"/sign-up"}
+            className={cn(buttonVariants(), "text-[16px] py-[20px]")}
           >
             GET STARTED <ArrowRight className="ml-[8px]" size={24} />
           </Link>
