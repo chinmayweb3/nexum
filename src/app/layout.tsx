@@ -23,12 +23,12 @@ export default function RootLayout({
     <html lang="en">
       <body className={cn(workSans.className, "bg-muted text-primary")}>
         <ThemeProvider attribute="class" defaultTheme="system">
-          {/* <TrpcProvider> */}
-          <ClerkProvider>
-            <Navbar />
-            {children}
-          </ClerkProvider>
-          {/* </TrpcProvider> */}
+          <TrpcProvider>
+            <ClerkProvider>
+              <Navbar />
+              {children}
+            </ClerkProvider>
+          </TrpcProvider>
         </ThemeProvider>
       </body>
     </html>
