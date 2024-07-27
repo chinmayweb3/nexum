@@ -2,5 +2,10 @@ import { Button } from "@/components/ui/button";
 import Image from "next/image";
 
 export default function Home() {
-  return <section className="min-h-screen"></section>;
+  return (
+    <main>
+      <section className="min-h-screen"></section>
+      <section className="min-h-screen"></section>
+    </main>
+  );
 }
