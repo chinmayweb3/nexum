@@ -8,6 +8,8 @@ export const appRouter = router({
   }),
   authCallback: publicProcedure.query(async () => {
     try {
+      console.log("starting");
+
       const { userId } = auth();
       // const { user } = useClerk();
 
