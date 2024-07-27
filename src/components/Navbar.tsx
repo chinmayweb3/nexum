@@ -48,7 +48,7 @@ const Navbar = () => {
 
 export default Navbar;
 
-const Theme = () => {
+const Theme = React.memo(() => {
   const [mounted, setMounted] = React.useState(false);
   const { theme, setTheme } = useTheme();
 
@@ -71,4 +71,4 @@ const Theme = () => {
       )}
     </Button>
   );
-};
+});
