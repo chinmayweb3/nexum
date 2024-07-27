@@ -1,27 +1,23 @@
-import { auth } from "@clerk/nextjs/server";
+import { auth, currentUser } from "@clerk/nextjs/server";
 import { publicProcedure, router } from "./trpc";
-import { useClerk } from "@clerk/nextjs";
+import { TRPCError } from "@trpc/server";
 
 export const appRouter = router({
   getTodos: publicProcedure.query(async () => {
     return [10, 20, 30];
   }),
   authCallback: publicProcedure.query(async () => {
-    try {
-      console.log("starting");
+    console.log("starting");
 
-      const { userId } = auth();
-      // const { user } = useClerk();
+    const user = await currentUser();
 
-      console.log("\n\nuser ", userId);
-      console.log("\n\nuser ");
+    if (!user?.id || !user?.primaryEmailAddress?.emailAddress)
+      throw new TRPCError({ code: "UNAUTHORIZED" });
 
-      return "auth callback";
-    } catch (er: any) {
-      console.log("errror ", er);
+    console.log("\n\nuser ", user);
+    console.log("\n\nuser ");
 
-      return "sdf";
-    }
+    return "auth callback";
   }),
 });
 
