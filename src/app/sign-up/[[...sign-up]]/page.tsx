@@ -2,8 +2,8 @@ import { SignUp } from "@clerk/nextjs";
 
 export default function Page() {
   return (
-    <div className="h-[100vh] backdrop-blur-md flex justify-center items-center">
-      <SignUp />
+    <div className="flex h-[100vh] items-center justify-center backdrop-blur-md">
+      <SignUp fallbackRedirectUrl={"/dashboard"} />
     </div>
   );
 }

@@ -5,7 +5,7 @@ import { Button, buttonVariants } from "./ui/button";
 import { cn } from "@/lib/utils";
 import { Separator } from "./ui/separator";
 import { ArrowRight } from "lucide-react";
-import { SignedIn, SignedOut, useClerk } from "@clerk/nextjs";
+import { ClerkLoading, SignedIn, SignedOut, useClerk } from "@clerk/nextjs";
 
 const Navbar = () => {
   const { signOut } = useClerk();
@@ -32,7 +32,7 @@ const Navbar = () => {
           </SignedIn>
           <Separator className="h-auto" orientation="vertical" />
           <Link href={"/sign-up"} className={cn(buttonVariants())}>
-            GET STARTED <ArrowRight className="ml-[8px]" size={24} />
+            GET STARTED <ArrowRight className="ml-[8px]" size={20} />
           </Link>
         </div>
       </div>
