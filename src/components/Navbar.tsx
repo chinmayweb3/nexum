@@ -4,11 +4,13 @@ import React from "react";
 import { Button, buttonVariants } from "./ui/button";
 import { cn } from "@/lib/utils";
 import { Separator } from "./ui/separator";
-import { ArrowRight } from "lucide-react";
-import { ClerkLoading, SignedIn, SignedOut, useClerk } from "@clerk/nextjs";
+import { ArrowRight, Moon, Sun } from "lucide-react";
+import { SignedIn, SignedOut, useClerk } from "@clerk/nextjs";
+import { useTheme } from "next-themes";
 
 const Navbar = () => {
   const { signOut } = useClerk();
+  const { setTheme, resolvedTheme: theme } = useTheme();
 
   return (
     <header className="absolute z-[10] flex h-[71px] w-full items-center bg-background shadow-sm">
@@ -16,7 +18,7 @@ const Navbar = () => {
         <Link href={"/"} className="inline-block text-[32px] font-bold">
           Nexum.
         </Link>
-        <div className="flex gap-[20px]">
+        <div className="flex items-center gap-[20px]">
           <SignedOut>
             <Link href={"/sign-in"} className={cn(buttonVariants())}>
               LOGIN
@@ -30,10 +32,20 @@ const Navbar = () => {
               LOGOUT
             </Button>
           </SignedIn>
-          <Separator className="h-auto" orientation="vertical" />
+          <Separator
+            className="h-auto self-stretch bg-primary/20"
+            orientation="vertical"
+          />
           <Link href={"/sign-up"} className={cn(buttonVariants())}>
             GET STARTED <ArrowRight className="ml-[8px]" size={20} />
           </Link>
+          <Button
+            variant={"secondary"}
+            onClick={() => setTheme(theme == "dark" ? "light" : "dark")}
+            size={"icon"}
+          >
+            {theme == "dark" ? <Sun size={16} /> : <Moon size={16} />}
+          </Button>
         </div>
       </div>
     </header>

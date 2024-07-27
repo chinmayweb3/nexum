@@ -4,6 +4,7 @@ import "./globals.css";
 import Navbar from "@/components/Navbar";
 import { cn } from "@/lib/utils";
 import { ClerkProvider } from "@clerk/nextjs";
+import { ThemeProvider } from "@/components/theme-provider";
 
 const workSans = Work_Sans({ subsets: ["latin"] });
 
@@ -20,10 +21,12 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={cn(workSans.className, "bg-muted text-primary")}>
-        <ClerkProvider>
-          <Navbar />
-          {children}
-        </ClerkProvider>
+        <ThemeProvider attribute="class" defaultTheme="system">
+          <ClerkProvider>
+            <Navbar />
+            {children}
+          </ClerkProvider>
+        </ThemeProvider>
       </body>
     </html>
   );
