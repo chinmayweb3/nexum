@@ -1,7 +1,4 @@
 import PageWrapper from "@/components/PageWrapper";
-import { Button } from "@/components/ui/button";
-import { Span } from "next/dist/trace";
-import Image from "next/image";
 
 export default function Home() {
   return (
