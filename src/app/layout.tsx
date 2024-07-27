@@ -22,7 +22,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={cn(workSans.className, "bg-muted text-primary")}>
-        <ThemeProvider attribute="class">
+        <ThemeProvider attribute="class" defaultTheme="system">
           {/* <TrpcProvider> */}
           <ClerkProvider>
             <Navbar />

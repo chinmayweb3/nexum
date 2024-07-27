@@ -49,19 +49,26 @@ const Navbar = () => {
 export default Navbar;
 
 const Theme = () => {
-  const { setTheme, theme } = useTheme();
+  const [mounted, setMounted] = React.useState(false);
+  const { theme, setTheme } = useTheme();
+
+  React.useEffect(() => setMounted(true), []);
 
   return (
     <Button
       variant={"secondary"}
-      onClick={() => {
-        console.log("Cllciked ", theme);
-
-        setTheme(theme == "dark" ? "light" : "dark");
-      }}
+      onClick={() => setTheme(theme == "dark" ? "light" : "dark")}
       size={"icon"}
     >
-      {theme && theme == "light" ? "sun" : "moon"}
+      {mounted ? (
+        theme == "light" ? (
+          <Sun size={16} />
+        ) : (
+          <Moon size={16} />
+        )
+      ) : (
+        <Sun size={16} />
+      )}
     </Button>
   );
 };
