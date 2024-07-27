@@ -1,12 +1,12 @@
-"use client";
 import PageWrapper from "@/components/PageWrapper";
 import React from "react";
 import { trpc } from "../_trpc/client";
 
-const Page = () => {
-  const t = trpc.getTodos.useQuery();
+const Page = async () => {
+  // const user = await currentUser();
+  // const u = auth();
 
-  console.log("cosnt ", t);
+  trpc.authCallback.useQuery();
 
   return <PageWrapper>Page</PageWrapper>;
 };
