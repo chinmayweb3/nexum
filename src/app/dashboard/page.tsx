@@ -1,12 +1,10 @@
 import PageWrapper from "@/components/PageWrapper";
 import React from "react";
-import { redirect, RedirectType } from "next/navigation";
+import { redirect } from "next/navigation";
 import { currentUser } from "@clerk/nextjs/server";
 import db from "@/lib/prisma";
 import { toast } from "sonner";
 import { wait } from "@/lib/wait";
-
-export const revalidate = 0; // revalidate at most every hour
 
 const Page = async () => {
   await wait(2);
