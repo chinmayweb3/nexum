@@ -4,11 +4,8 @@ import { redirect } from "next/navigation";
 import { currentUser } from "@clerk/nextjs/server";
 import db from "@/lib/prisma";
 import { toast } from "sonner";
-import { wait } from "@/lib/wait";
 
 const Page = async () => {
-  await wait(2);
-
   const user = await currentUser();
   if (!user?.id) {
     toast("User not Logged In");
