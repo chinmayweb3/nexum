@@ -6,6 +6,7 @@ import { cn } from "@/lib/utils";
 import { ClerkProvider } from "@clerk/nextjs";
 import { ThemeProvider } from "@/components/theme-provider";
 import TrpcProvider from "./_trpc/trpcProvider";
+import { Toaster } from "@/components/ui/sonner";
 
 const workSans = Work_Sans({ subsets: ["latin"] });
 
@@ -27,6 +28,7 @@ export default function RootLayout({
             <ClerkProvider>
               <Navbar />
               {children}
+              <Toaster />
             </ClerkProvider>
           </TrpcProvider>
         </ThemeProvider>

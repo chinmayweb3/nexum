@@ -36,7 +36,7 @@ const Navbar = () => {
             className="h-auto self-stretch bg-primary/20"
             orientation="vertical"
           />
-          <Link href={"/sign-up"} className={cn(buttonVariants())}>
+          <Link href={"/dashboard"} className={cn(buttonVariants())}>
             GET STARTED <ArrowRight className="ml-[8px]" size={20} />
           </Link>
           <Theme />

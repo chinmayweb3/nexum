@@ -1,23 +1,38 @@
-import { auth, currentUser } from "@clerk/nextjs/server";
+import { currentUser } from "@clerk/nextjs/server";
 import { publicProcedure, router } from "./trpc";
 import { TRPCError } from "@trpc/server";
+import db from "@/lib/prisma";
+import { PrismaClientKnownRequestError } from "@prisma/client/runtime/library";
 
 export const appRouter = router({
   getTodos: publicProcedure.query(async () => {
-    return [10, 20, 30];
+    console.log("getTodes");
+
+    return { success: [10, 20, 30] };
   }),
   authCallback: publicProcedure.query(async () => {
     console.log("starting");
+    const curUser = await currentUser();
 
-    const user = await currentUser();
-
-    if (!user?.id || !user?.primaryEmailAddress?.emailAddress)
+    if (!curUser?.id || !curUser?.primaryEmailAddress?.emailAddress)
       throw new TRPCError({ code: "UNAUTHORIZED" });
 
-    console.log("\n\nuser ", user);
-    console.log("\n\nuser ");
+    const findUser = await db.user.findFirst({
+      where: { id: curUser.id },
+    });
 
-    return "auth callback";
+    console.log("authCallback ", findUser?.id);
+
+    if (!findUser?.id) {
+      await db.user.create({
+        data: {
+          email: curUser.primaryEmailAddress.emailAddress,
+          id: curUser.id,
+        },
+      });
+    }
+
+    return { success: true };
   }),
 });
 
