@@ -1,23 +1,24 @@
 "use client";
+
 import { useRouter, useSearchParams } from "next/navigation";
 import React, { useEffect } from "react";
-import { trpc } from "../_trpc/client";
 import PageWrapper from "@/components/PageWrapper";
 import { useAuth } from "@clerk/nextjs";
+import { wait } from "@/lib/wait";
 
 const Page = () => {
-  const router = useRouter();
-
   const { userId } = useAuth();
-
-  const params = useSearchParams();
-  const origin = params.get("origin");
+  const router = useRouter();
+  const searchParams = useSearchParams();
+  const origin = searchParams.get("origin");
 
   console.log("useAuth ", userId);
+
   useEffect(() => {
     (async () => {
+      await wait();
       const f = await fetch("/api/authcallback", { method: "GET" });
-      router.push("/dashboard");
+      router.back();
     })();
   }, []);
 

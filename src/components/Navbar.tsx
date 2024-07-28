@@ -20,7 +20,11 @@ const Navbar = () => {
         </Link>
         <div className="flex items-center gap-[20px]">
           <SignedOut>
-            <Link href={"/sign-in"} className={cn(buttonVariants())}>
+            <Link
+              href={"/sign-in"}
+              prefetch={false}
+              className={cn(buttonVariants())}
+            >
               LOGIN
             </Link>
           </SignedOut>
@@ -36,7 +40,11 @@ const Navbar = () => {
             className="h-auto self-stretch bg-primary/20"
             orientation="vertical"
           />
-          <Link href={"/dashboard"} className={cn(buttonVariants())}>
+          <Link
+            href={"/dashboard"}
+            prefetch={false}
+            className={cn(buttonVariants())}
+          >
             GET STARTED <ArrowRight className="ml-[8px]" size={20} />
           </Link>
           <Theme />
