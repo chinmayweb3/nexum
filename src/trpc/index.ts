@@ -1,8 +1,7 @@
 import { currentUser } from "@clerk/nextjs/server";
-import { publicProcedure, router } from "./trpc";
+import { privateProcedure, publicProcedure, router } from "./trpc";
 import { TRPCError } from "@trpc/server";
 import db from "@/lib/prisma";
-import { PrismaClientKnownRequestError } from "@prisma/client/runtime/library";
 
 export const appRouter = router({
   getTodos: publicProcedure.query(async () => {
@@ -34,6 +33,8 @@ export const appRouter = router({
 
     return { success: true };
   }),
+
+  getUserFiles: privateProcedure.query(async (e) => {}),
 });
 
 export type AppRouter = typeof appRouter;
