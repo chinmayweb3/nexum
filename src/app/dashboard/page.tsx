@@ -4,6 +4,7 @@ import { redirect } from "next/navigation";
 import { currentUser } from "@clerk/nextjs/server";
 import db from "@/lib/prisma";
 import { toast } from "sonner";
+import Dashboard from "./dashboard";
 
 const Page = async () => {
   const user = await currentUser();
@@ -29,9 +30,7 @@ const Page = async () => {
 
   return (
     <PageWrapper>
-      <section className="container h-[calc(100vh-71px)] w-full">
-        <div className="flex items-center justify-center">Dashboard Page</div>
-      </section>
+      <Dashboard />
     </PageWrapper>
   );
 };
