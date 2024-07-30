@@ -34,7 +34,14 @@ export const appRouter = router({
     return { success: true };
   }),
 
-  getUserFiles: privateProcedure.query(async (e) => {}),
+  getUserFiles: privateProcedure.query(async ({ ctx }) => {
+    const { userId } = ctx;
+
+    const files = await db.file.findMany({
+      where: { userId },
+    });
+    return files;
+  }),
 });
 
 export type AppRouter = typeof appRouter;
