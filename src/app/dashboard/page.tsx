@@ -6,6 +6,8 @@ import db from "@/lib/prisma";
 import { toast } from "sonner";
 import Dashboard from "./dashboard";
 
+// export const revalidate = 60;
+
 const Page = async () => {
   const user = await currentUser();
   if (!user?.id) {

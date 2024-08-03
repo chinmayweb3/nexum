@@ -50,8 +50,8 @@
     --accent-foreground: 60 9.1% 97.8%;
     --destructive: 0 62.8% 30.6%;
     --destructive-foreground: 60 9.1% 97.8%;
-    --soft-destructive: 0 62.8% 30.6%; /* custom value */
-    --soft-destructive-foreground: 60 9.1% 97.8%; /* custom value */
+    --soft-destructive: 0 85% 97%; /* custom value */
+    --soft-destructive-foreground: 0 84.2% 60.2%; /* custom value */
     --border: 12 6.5% 15.1%;
     --input: 12 6.5% 15.1%;
     --ring: 24 5.7% 82.9%;

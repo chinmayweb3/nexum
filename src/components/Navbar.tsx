@@ -30,7 +30,7 @@ const Navbar = () => {
           </SignedOut>
           <SignedIn>
             <Button
-              variant={"destructive"}
+              variant={"softDestructive"}
               onClick={() => signOut({ redirectUrl: "/" })}
             >
               LOGOUT

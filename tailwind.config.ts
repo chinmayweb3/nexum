@@ -32,11 +32,10 @@ const config = {
           DEFAULT: "hsl(var(--secondary))",
           foreground: "hsl(var(--secondary-foreground))",
         },
-        softDestructive: {
+        "soft-destructive": {
           DEFAULT: "hsl(var(--soft-destructive))",
           foreground: "hsl(var(--soft-destructive-foreground))",
         },
-
         destructive: {
           DEFAULT: "hsl(var(--destructive))",
           foreground: "hsl(var(--destructive-foreground))",
