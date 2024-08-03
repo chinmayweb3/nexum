@@ -12,6 +12,10 @@ import { Button } from "@/components/ui/button";
 const Dashboard = () => {
   const { data: files, isLoading } = trpc.getUserFiles.useQuery();
 
+  const { mutate: deleteFile } = trpc.deleteFile.useMutation();
+
+  // deleteFile({id:"id"})
+
   return (
     <div className="container mt-[60px] flex flex-grow flex-col">
       <div className="flex items-center justify-between">
@@ -32,7 +36,7 @@ const Dashboard = () => {
                 return (
                   <li
                     key={i.id}
-                    className="flex w-full flex-col rounded-md bg-popover shadow-sm"
+                    className="flex w-full flex-col rounded-md bg-popover duration-100 hover:shadow-sm"
                   >
                     <div className="flex items-center justify-start gap-[20px] px-[15px] py-[20px]">
                       <Avatar>
