@@ -1,20 +1,33 @@
 "use client";
-import React from "react";
+import React, { useState } from "react";
 import UploadButton from "./uploadButton";
 import { trpc } from "../_trpc/client";
-import { Ghost, MessageSquare, Plus, Trash } from "lucide-react";
+import { Ghost, Loader2, MessageSquare, Plus, Trash } from "lucide-react";
 import { Skeleton } from "@/components/ui/skeleton";
 import { Separator } from "@/components/ui/separator";
 import { format } from "date-fns";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
+import { cn } from "@/lib/utils";
+import Link from "next/link";
 
 const Dashboard = () => {
+  const [currentDeletingFile, setCurrentDeletingFile] = useState<string | null>(
+    null,
+  );
+  const utils = trpc.useUtils();
   const { data: files, isLoading } = trpc.getUserFiles.useQuery();
-
-  const { mutate: deleteFile } = trpc.deleteFile.useMutation();
-
-  // deleteFile({id:"id"})
+  const { mutate: deleteFile } = trpc.deleteFile.useMutation({
+    onSuccess() {
+      utils.getUserFiles.invalidate();
+    },
+    onMutate({ id }) {
+      setCurrentDeletingFile(id);
+    },
+    onSettled() {
+      setCurrentDeletingFile(null);
+    },
+  });
 
   return (
     <div className="container mt-[60px] flex flex-grow flex-col">
@@ -36,18 +49,20 @@ const Dashboard = () => {
                 return (
                   <li
                     key={i.id}
-                    className="flex w-full flex-col rounded-md bg-popover duration-100 hover:shadow-sm"
+                    className="flex w-full flex-col rounded-md bg-popover duration-100 hover:shadow-md"
                   >
-                    <div className="flex items-center justify-start gap-[20px] px-[15px] py-[20px]">
-                      <Avatar>
-                        <AvatarImage src="https://github.com/shadcn.png" />
-                        <AvatarFallback>CN</AvatarFallback>
-                      </Avatar>
+                    <Link href={"/dashboard/" + i.id} prefetch={false}>
+                      <div className="flex items-center justify-start gap-[20px] px-[15px] py-[20px]">
+                        <Avatar>
+                          <AvatarImage src="https://github.com/shadcn.png" />
+                          <AvatarFallback>CN</AvatarFallback>
+                        </Avatar>
 
-                      <h3 className="text-lg font-medium text-primary/90">
-                        {i.name}
-                      </h3>
-                    </div>
+                        <h3 className="text-lg font-medium text-primary/90">
+                          {i.name}
+                        </h3>
+                      </div>
+                    </Link>
                     <Separator orientation="horizontal" />
                     <div className="grid grid-cols-3 px-[15px] py-[10px] text-xs text-primary/70">
                       <div className="flex items-center justify-center gap-2">
@@ -59,11 +74,19 @@ const Dashboard = () => {
                         <p>{i.uploadStatus}</p>
                       </div>
                       <Button
+                        onClick={() => deleteFile({ id: i.id })}
                         size={"sm"}
-                        className="w-full"
+                        className={cn(
+                          "w-full",
+                          currentDeletingFile && "cursor-not-allowed",
+                        )}
                         variant={"softDestructive"}
                       >
-                        <Trash className="h-4 w-4" />
+                        {currentDeletingFile ? (
+                          <Loader2 className="h-4 w-4 animate-spin" />
+                        ) : (
+                          <Trash className="h-4 w-4" />
+                        )}
                       </Button>
                     </div>
                   </li>
